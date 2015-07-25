@@ -22,6 +22,6 @@ $HOMEDIR/.vimrc
 "
 DESTDIR="$HOMEDIR/dotfiles/"
 
-rsync -Lav $HOMEFILES $ETCFILES $DESTDIR
+rsync -Lav $HOMEFILES $DESTDIR
 chown -R $USR:$USR $DESTDIR
 
