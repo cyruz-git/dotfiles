@@ -18,6 +18,7 @@ $HOMEDIR/.colors
 $HOMEDIR/.gitconfig
 $HOMEDIR/.profile
 $HOMEDIR/.tmux.conf
+$HOMEDIR/.vim
 $HOMEDIR/.vimrc
 "
 DESTDIR="$HOMEDIR/dotfiles/"

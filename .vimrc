@@ -49,6 +49,7 @@ if has("autocmd")
 autocmd BufReadPost * if line("'\"")>0 && line("'\"")<=line("$")|exe "normal g`\""|endif	" always jump to the last cursor position
 " autocmd BufRead *.txt set tw=80 " limit width to n cols for txt files
 autocmd BufRead ~/.mutt/temp/mutt-* set tw=80 ft=mail nocindent spell	" width, mail syntax hilight, spellcheck
+autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 endif
 
 " keep cursor centered
