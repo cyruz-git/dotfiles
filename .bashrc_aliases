@@ -33,3 +33,4 @@ alias psusr='ps uf --ppid 2 -p 2 --deselect'
 # convenient aliases
 alias sudo='sudo '
 alias protectdir='touch ./-i'
+alias rsyncacl="rsync -rv --chmod=ug+rwx,Fug-x,o-rwx"
