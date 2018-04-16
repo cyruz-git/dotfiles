@@ -9,7 +9,7 @@ for screenshots, details and color theme implementations for terminal
 emulators and other applications, such as Vim, Emacs, and Mutt.
 
 Quick note for MacOS users: Your OS does not use GNU ls, so you can not use
-this themes. However, [@logic](https://github.com/logic) provided something
+these themes. However, [@logic](https://github.com/logic) provided something
 your can use in [this issue](https://github.com/seebi/dircolors-solarized/issues/10).
 Another option (as [proposed](https://github.com/seebi/dircolors-solarized/issues/10#issuecomment-2641754)
 by [@metamorfos](https://github.com/metamorfos)) is to install GNU ls with
@@ -79,16 +79,10 @@ Read on for more details.
 
 <h4 id="256dark-screenshots">Screenshots</h4>
 
-Here is a [1920pxx1200px screenshot](https://github.com/seebi/dircolors-solarized/raw/master/img/dircolors.256dark.png) of a prepared [tmux](http://tmux.sourceforge.net/)-session.
-It is captured from a [gnome-terminal](http://library.gnome.org/users/gnome-terminal/stable/index.html.en) using the [dz-version of the awesome Inconsolata font](http://nodnod.net/2009/feb/12/adding-straight-single-and-double-quotes-inconsola/) but you can use any [libvte](http://developer.gnome.org/vte/0.27/) based terminal emulator (and other emulator which support 256colors).
-I recently switched to [sakura](https://launchpad.net/sakura) and my decision was based on [this comparison](http://www.calno.com/evilvte/) and the priming that the gnome-terminal was too slow and too fat.
+Here is a [screenshot](https://github.com/seebi/dircolors-solarized/raw/master/img/dircolors.256dark.png) of a prepared session which shows the content of the test-directory.tar.bz2.
+It is captured from an [iterm2](http://iterm2.com/) using the [dz-version of the awesome Inconsolata font](http://nodnod.net/2009/feb/12/adding-straight-single-and-double-quotes-inconsola/) (but you can use any terminal emulator supporting 256colors).
 
- * **upper left** - Common colors in action: Executables, archives, audio/video stuff, dead links
- * **lower left** - latex directory: tex-trash is in comment style and tex are main files of interest and highlighted
- * **upper right and thereunder** - source directories: all source files are standard highlighted, makefiles, configuration files and READMEs are of special interest, and object and class files are commented out.
- * **lower right** - all colors in action, uncommon stuff like pipes and block devices
-
-![tmux session](https://github.com/seebi/dircolors-solarized/raw/master/img/dircolors.256dark.png)
+![session](https://github.com/seebi/dircolors-solarized/raw/master/img/dircolors.256dark.png)
 
 Some more screenshots are provided by [andrew from webupd8.org](http://www.webupd8.org/2011/04/solarized-must-have-color-paletter-for.html).
 
@@ -178,6 +172,9 @@ To use any of the database files, run this:
 To activate the theme for all future shell sessions, copy or link that file to
 `~/.dir_colors`, and include the above command in your `~/.profile` (for bash)
 or `~/.zshrc` (for zsh).
+
+For Ubuntu 14.04 it is sufficient to copy or link database file to `~/.dircolors`.
+Statement in `~/.bashrc` will take care about triggering eval command.
 
 ### Additional Instructions for 256-color Solarized Themes, e.g. "256dark"
 
