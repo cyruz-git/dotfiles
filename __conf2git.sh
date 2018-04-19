@@ -11,9 +11,6 @@ HOMEDIR="/home/$USR"
 HOMEFILES="
 $HOMEDIR/.bash_logout
 $HOMEDIR/.bashrc
-$HOMEDIR/.bashrc_aliases
-$HOMEDIR/.bashrc_colors
-$HOMEDIR/.bashrc_functions
 $HOMEDIR/.colors
 $HOMEDIR/.gitconfig
 $HOMEDIR/.profile
