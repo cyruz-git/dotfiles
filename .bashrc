@@ -6,14 +6,14 @@
 # ALIASES
 # --------------------------------
 
-# 'directory' group
+# Directories
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 
-# 'ls' group
+# LS
 alias ls='ls -p --color=auto --group-directories-first'
 alias la='ls -a'
 alias ll='ls -l'
@@ -21,51 +21,61 @@ alias lla='ls -la'
 alias llt='ls -lt'
 alias llat='ls -lat'
 
-# 'grep' group
+# Grep
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
-# packages aliases
-alias pkg-purge-search='aptitude search '~c''
-alias pkg-purge-rem='aptitude purge '~c''
+# Packages
+alias deb-purge-search='aptitude search '~c''
+alias deb-purge-rem='aptitude purge '~c''
+alias xi='xbps-install'
+alias xq='xbps-query'
+alias xqr='xbps-query -R'
+alias xr='xbps-remove -R'
 
-# ps aliases
+# Processes
 alias psall='ps axuf'
 alias psusr='ps uf --ppid 2 -p 2 --deselect'
 
-# convenient aliases
-alias sudo='sudo '
+# Convenience
+alias sudo='sudo ' # Makes aliases work with sudo.
 alias protectdir='touch ./-i'
 alias rsyncacl="rsync -rv --chmod=ug+rwx,Fug-x,o-rwx"
-
 
 # COLORS
 # --------------------------------
 
-# source LS colors
+# Source LS colors.
 eval $( dircolors ~/.colors/solarized/dircolors-solarized/dircolors.256dark )
 
-# source TTY colors
+# Source TTY colors.
 . ~/.colors/solarized/tty-solarized/tty-solarized-dark.sh
 
-# source LESS colors
+# Source LESS colors.
 . ~/.colors/generic/less/less_colors_2
 
 
 # FUNCTIONS
 # --------------------------------
 
-# mkcd - make a dir and cd into it
-# usage: mkcd <dir name>
+# tcat - Output file content expanding tab to spaces
+# Usage: tcat <filename>
+tcat() {
+	TABSTOPS=4
+	cat $@ | expand -t${TABSTOPS}
+}
+
+# mkcd - Make a dir and cd into it
+# Usage: mkcd <dir name>
 mkcd() {
 	mkdir $1
 	cd $1
 	return 0
 }
 
-# extract - archive extractor
-# usage: extract <file>
+# extract - Archive extractor
+# Usage: extract <file>
 extract() {
 	if [ -f "$1" ] ; then
 		case "$1" in
@@ -92,8 +102,8 @@ extract() {
 	return 0
 }
 
-# fullbackup - backup entire system
-# usage: fullbackup
+# fullbackup - Backup entire system
+# Usage: fullbackup
 fullbackup() {
 	read -p "Starting complete system backup, are you sure? " -n 1 -r ; echo
 	if [[ $REPLY =~ ^[Yy]$ ]] ; then
@@ -102,8 +112,8 @@ fullbackup() {
 	fi
 }
 
-# fullrestore - restore system from backup
-# usage: fullrestore <path to file>
+# fullrestore - Restore system from backup
+# Usage: fullrestore <path to file>
 fullrestore() {
 	[ "$#" -eq 1 ] || { echo "Usage: fullrestore <path to file>" ; return 1 ; } 
 	read -p "Starting complete system restore, are you sure? " -n 1 -r ; echo
@@ -113,7 +123,9 @@ fullrestore() {
 	fi
 }
 
-colorcheck() {
+# colortable - Show color table
+# Usage: colorcheck
+colortable() {
 	T='gYw'   # The test text
 
 	echo -e "\n                 40m     41m     42m     43m     44m     45m     46m     47m";
@@ -131,7 +143,9 @@ colorcheck() {
 	echo
 }
 
-colorshow() {
+# colorlist - Show color list
+# Usage: colorlist
+colorlist() {
 	x=`tput op` y=`printf %80s`
 	for i in {0..256}; do
 		o=00$i
@@ -144,48 +158,52 @@ colorshow() {
 # STARTUP
 # --------------------------------
 
-# if not running interactively, don't do anything
+# If not running interactively, don't do anything.
 [ -z "$PS1" ] && return
 
-# don't put duplicate lines in the history. See bash(1) for more options
-# don't overwrite GNU Midnight Commander's setting of `ignorespace'.
+# Don't put duplicate lines in the history. See bash(1) for more options.
+# Don't overwrite GNU Midnight Commander's setting of `ignorespace'.
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
-# ... or force ignoredups and ignorespace
-export HISTCONTROL=ignoreboth
 
-# bash options
+# Bash options.
 shopt -s histappend
 shopt -s checkwinsize
 
-# make less more friendly for non-text input files, see lesspipe(1)
+# Make less more friendly for non-text input files, see lesspipe(1).
 #[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# prompt customization
+# Prompt customization.
 set_prompt_style () {
 	[ "$USER" = "root" ] && USRCOLOR="1;31m" || USRCOLOR="0;34m"
 	PS1="┌─[\[\e[$USRCOLOR\]\u\[\e[1;32m\]@\[\e[0;34m\]\h\[\e[m\]][\[\e[0;32m\]\w\[\e[m\]]\n└─▪ "
 }
 set_prompt_style
 
-# enable programmable completion features (you don't need to enable
+# Enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ]; then
 	. /etc/bash_completion
 fi
 
-# export TERM for TMUX
-export TERM=screen-256color
+# Export TERM variables for dvtm or to a general screen one if dvtm is not installed.
+# Requires terminal definition in "/usr/share/terminfo/d/".
+# To make KiTTY work the option "Allow ACS line drawing in UTF" must be checked in "Window > Translation".
+# Eventually ACS drawing can be disabled exporting the variable "NCURSES_NO_UTF8_ACS=1".
+type dvtm > /dev/null 2>&1 && export TERM=dvtm-256color || export TERM=screen-256color
 
-# start tmux
-#if [ "$PS1" != "" -a "${STARTED_TMUX:-x}" = x -a "${SSH_TTY:-x}" != x ]; then
-#	STARTED_TMUX=1; export STARTED_TMUX
-#	sleep 1
-#	if  tmux has-session -t remote > /dev/null 2>&1; then
-#		tmux -2 -u attach-session -t remote
-#	else
-#		tmux -2 -u new-session -s remote
-#	fi
-#	exit 0
-#fi
+# Start abduco + dvtm. !!! dvtm & abduco are not behaving correctly on a basic Void Linux setup !!!
+#abduco -A main dvtm
+
+# Start tmux.
+if [ "$PS1" != "" -a "${STARTED_TMUX:-x}" = x -a "${SSH_TTY:-x}" != x ]; then
+	STARTED_TMUX=1; export STARTED_TMUX
+	sleep 1
+	if  tmux has-session -t main > /dev/null 2>&1; then
+		tmux -2 -u attach-session -t main
+	else
+		tmux -2 -u new-session -s main
+	fi
+	exit 0
+fi
 
