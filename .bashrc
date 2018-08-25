@@ -31,8 +31,12 @@ alias deb-purge-search='aptitude search '~c''
 alias deb-purge-rem='aptitude purge '~c''
 alias xi='xbps-install'
 alias xq='xbps-query'
+alias xql='xbps-query -l'
+alias xqs='xbps-query -s'
 alias xqr='xbps-query -R'
-alias xr='xbps-remove -R'
+alias xqrs='xbps-query -Rs'
+alias xr='xbps-remove'
+alias xrr='xbps-remove -R'
 
 # Processes
 alias psall='ps axuf'
@@ -163,7 +167,7 @@ colorlist() {
 
 # Don't put duplicate lines in the history. See bash(1) for more options.
 # Don't overwrite GNU Midnight Commander's setting of `ignorespace'.
-export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
+export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoreboth
 
 # Bash options.
 shopt -s histappend
