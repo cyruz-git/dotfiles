@@ -1,0 +1,205 @@
+[colors]
+background = #aa073642
+foreground = #657b83
+blue = #268bd2
+cyan = #2aa198
+green = #859900
+orange = #cb4b16
+pink = #d33682
+purple = #6c71c4
+red = #dc322f
+yellow = #b58900
+black = #000
+white = #fff
+
+[bar/i3bar]
+; Size
+width = 100%
+height = 28
+
+; Offset
+;offset-x = 50%
+;offset-y = 50%
+
+; Radius
+radius = 0
+
+; Align modules fixed to middle
+fixed-center = true
+
+; Colors
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+; Underline
+line-size = 2
+line-color = ${colors.foreground}
+
+; Border
+border-size = 0
+border-color = ${colors.black}
+
+; Padding
+padding-left = 0
+padding-right = 0
+
+; Margin of modules
+module-margin-left = 0
+module-margin-right = 0
+
+; Font
+font-0 = dina:pixelsize=11;1
+font-1 = siji:pixelsize=10;1
+font-2 = unifont:size=6;1
+
+; Modules
+modules-left = i3
+modules-center =
+modules-right = network-speed wifi memory cpu temperature battery date
+
+; Cursor actions
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/i3]
+type = internal/i3
+
+; Mouse click
+enable-click = true
+
+; Mouse scroll
+enable-scroll = false
+
+; Sort
+index-sort = true
+
+; Display icons
+fuzzy-match = true
+
+; Icons
+ws-icon-0 = Main;
+ws-icon-1 = Terminal;
+ws-icon-2 = Web;
+ws-icon-3 = Program;
+ws-icon-4 = Other;
+ws-icon-default = 
+
+; Focused label
+label-focused = %icon% %name%
+label-focused-foreground = ${colors.blue}
+label-focused-padding = 2
+
+; Unfocused labels
+label-unfocused = %icon% %name%
+label-unfocused-foreground = ${colors.foreground}
+label-unfocused-padding = 2
+
+; Visible labels
+label-visible = %icon% %name%
+label-visible-foreground = ${colors.foreground}
+label-visible-padding = 2
+
+; Urgent labels
+label-urgent = %icon% %name%
+label-urgent-foreground = ${colors.red}
+label-urgent-padding = 2
+
+[module/date]
+type = internal/date
+
+; Update interval
+interval = 1.0
+
+; Format
+time = %I:%M %p
+
+; Label
+label =  %time%
+label-foreground = ${colors.foreground}
+label-padding = 2
+
+
+[module/temperature]
+type = internal/temperature
+
+; Label
+label =  %temperature:2%
+label-foreground = ${colors.foreground}
+label-padding = 2
+
+; Warning label
+label-warn =  %temperature%
+label-warn-foreground = ${colors.red}
+label-warn-padding = 2
+
+[module/battery]
+type = internal/battery
+
+; Full battery level
+full-at = 96
+
+; Battery and adapter
+battery = BAT0
+adapter = AC0
+
+; Charging label
+label-charging =  %percentage:3%%
+label-charging-foreground = ${colors.foreground}
+label-charging-padding = 2
+
+; Discharging label
+label-discharging =  %percentage:3%%
+label-discharging-foreground = ${colors.red}
+label-discharging-padding = 2
+
+; Full label
+label-full =  100%
+label-full-foreground = ${colors.foreground}
+label-full-padding = 2
+
+[module/cpu]
+type = internal/cpu
+
+; Label
+label =  %percentage:2%%
+label-foreground = ${colors.foreground}
+label-padding = 2
+
+[module/filesystem]
+type = internal/fs
+
+; Mount points
+mount-0 = /
+
+; Mounted label
+label-mounted =  %used:6%/%total%
+label-mounted-foreground = ${colors.foreground}
+label-mounted-padding = 2
+
+[module/network-speed]
+type = internal/network
+
+; Interface
+interface = wlp2s0
+
+; Connected label
+label-connected =  %upspeed:8%  %downspeed:8%
+label-connected-foreground = ${colors.foreground}
+label-connected-padding = 2
+
+; Disconnected label
+label-disconnected =  Not Connected
+label-disconnected-foreground = ${colors.red}
+label-disconnected-padding = 2
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 10
+margin-bottom = 10

@@ -1,8 +1,0 @@
-7c7
-< if [ "$TERM" = "linux" ]; then
----
-> #if [ "$TERM" = "linux" ]; then
-25c25
-< fi
----
-> #fi

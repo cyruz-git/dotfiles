@@ -7,10 +7,12 @@ filetype plugin on
 
 " Color scheme
 set background=dark
-"let g:solarized_termcolors=256 " Degraded solarized 256 colorscheme.
-colorscheme solarized
-"let g:solarized_termtrans=1
-
+colorscheme flattened_dark
+if exists('+termguicolors')
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+endif
 
 set nocompatible " Leave the old ways behind...
 " set nowrap " Don't wrap lines.
@@ -29,11 +31,14 @@ set wildmode=list:longest,full
 set colorcolumn=120
 let g:loaded_matchparen=1
 
+" Mouse configuration
+set mouse=a " Enable scrolling on vim.
+
 " Tabs and indenting
-set noexpandtab " Don't insert spaces instead of tabs.
+set expandtab " Insert spaces instead of tabs.
 set tabstop=4 " Tabs appear as n number of columns.
 set shiftwidth=4 " N cols for auto-indenting.
-" set autoindent " Auto indents next new line.
+set autoindent " Auto indents next new line.
 
 " Searching
 set hlsearch " Highlight all search results.
@@ -54,11 +59,11 @@ autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 endif
 
 " Keep cursor centered.
-:nnoremap j jzz
-:nnoremap k kzz
+nnoremap j jzz
+nnoremap k kzz
 
 " Space bar un-highligts search.
-:noremap <silent> <Space> :silent noh<Bar>echo<CR>
+noremap <silent> <Space> :silent noh<Bar>echo<CR>
 
 " Allows writing to files with root priviledges.
 cmap w!! w !sudo tee % > /dev/null

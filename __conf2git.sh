@@ -3,23 +3,24 @@
 # --------------------------------
 # cyruz - http://ciroprincipe.info
 
-### rsync check
-type rsync > /dev/null 2>&1 || { echo >&2 "Error: rsync not installed. Aborting."; exit 1; }
-
-USR="cyrus"
-HOMEDIR="/home/$USR"
-HOMEFILES="
-$HOMEDIR/.bash_logout
-$HOMEDIR/.bashrc
-$HOMEDIR/.colors
-$HOMEDIR/.gitconfig
-$HOMEDIR/.profile
-$HOMEDIR/.tmux.conf
-$HOMEDIR/.vim
-$HOMEDIR/.vimrc
+HOME_FILES="
+.bashrc
+.config
+.gitconfig
+.profile
+.tmux.conf
+.vim
+.vimrc
+.xinitrc
+.Xresources
 "
-DESTDIR="$HOMEDIR/dotfiles/"
+DEST_DIR="$HOME/dotfiles"
 
-rsync -Lav $HOMEFILES $DESTDIR
-chown -R $USR:$USR $DESTDIR
+echo "Copying configuration files to repository..."
 
+for i in $HOME_FILES; do cp -Rf "$HOME/$i" "$DEST_DIR/"; done
+
+# Remove google-chrome directory if present.
+[[ -d "$DEST_DIR/.config/google-chrome" ]] && rm -rf "$DEST_DIR/.config/google-chrome"
+
+echo "Done."
