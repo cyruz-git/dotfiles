@@ -45,7 +45,7 @@ done
 
 [[ ! -d ./vim ]] && mkdir -p vim
 echo -e "\nDownloading vim color files...\n"
-BASE_URL=https://github.com/altercation/vim-colors-solarized/blob/master/colors
+BASE_URL=https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors
 wget -nv -O ./vim/solarized.vim $BASE_URL/solarized.vim
 BASE_URL=https://raw.githubusercontent.com/romainl/flattened/master/colors
 wget -nv -O ./vim/flattened_dark.vim  $BASE_URL/flattened_dark.vim
